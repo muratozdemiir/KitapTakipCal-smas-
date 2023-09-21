@@ -2,7 +2,6 @@
 using KitapTakip.Models;
 using KitapTakip.Utility;
 
-
 namespace KitapTakip.Controllers;
 
 public class KitapTuruController : Controller
@@ -35,6 +34,16 @@ public class KitapTuruController : Controller
             return RedirectToAction("Index", "KitapTuru"); //chatgpt den aldım.
         }
         return View();
+    }
+
+
+    [HttpGet]
+    public IActionResult Delete(int id)
+    {
+        var bookTuru = _uygulamaDbContext.KitapTurleri.Find(id);
+        _uygulamaDbContext.KitapTurleri.Remove(bookTuru);
+        _uygulamaDbContext.SaveChanges();
+        return RedirectToAction("Index");
     }
 
 }
